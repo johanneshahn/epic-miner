@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.5)
+set(ignoreMe "${CMAKE_ASM_COMPILER}${CMAKE_ASM_FLAGS}")
 project (CuckooMinerPlugins)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/plugins)

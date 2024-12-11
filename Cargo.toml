@@ -30,7 +30,7 @@ native-tls = "0.2"
 serde = "1"
 serde_derive = "1"
 serde_json = "1"
-slog = { version = "~2.1", features = ["max_level_trace", "release_max_level_trace"] }
+slog = { version = "~2.7", features = ["max_level_trace", "release_max_level_trace"] }
 term = "0.4"
 time = "0.1"
 rand = "^0.3.16"
@@ -46,13 +46,19 @@ ocl_cuckatoo = { path = "./ocl_cuckatoo", version = "1.0.2", optional = true}
 randomx = { path = "./randomx-rust", version = "0.1.0" }
 randomx_miner = { path = "./randomx-miner", version = "0.1.0" }
 
-[target.'cfg(windows)'.dependencies]
-cursive = { version = "0.14", default-features = false, features = ["pancurses-backend"] }
-[target.'cfg(windows)'.dependencies.pancurses]
-version = "0.16.0"
-features = ["win32"]
-[target.'cfg(unix)'.dependencies]
-cursive = "0.12"
+rustc-serialize = "0.3.25"
+
+cursive = { version = "0.17", default-features = false, features = [
+    "pancurses-backend",
+] }
+
+###[target.'cfg(windows)'.dependencies]
+###cursive = { version = "0.14", default-features = false, features = ["pancurses-backend"] }
+###[target.'cfg(windows)'.dependencies.pancurses]
+###version = "0.16.0"
+###features = ["win32"]
+###[target.'cfg(unix)'.dependencies]
+###cursive = "0.12"
 
 [[test]]
 name = "cucumber"

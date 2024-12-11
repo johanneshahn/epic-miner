@@ -167,7 +167,7 @@ impl CuckooMiner {
 							s.clone()
 						})
 						.collect();
-					for mut ss in filtered_sols.iter_mut() {
+					for ss in filtered_sols.iter_mut() {
 						ss.nonce = nonce;
 						ss.id = job_id as u64;
 					}
