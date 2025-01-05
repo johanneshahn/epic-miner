@@ -16,19 +16,22 @@
 //! stratum server
 
 use bufstream::BufStream;
-use core::Algorithm;
-use core::{AlgorithmParams, Solution};
+
 use native_tls::{TlsConnector, TlsStream};
 use serde_json;
-use stats;
+
 use std;
 use std::io::{self, BufRead, ErrorKind, Read, Write};
 use std::net::TcpStream;
 use std::sync::{mpsc, Arc, RwLock};
 use std::thread;
 use time;
-use types;
-use util::LOGGER;
+
+use crate::stats;
+use crate::types;
+use crate::util::LOGGER;
+use core::Algorithm;
+use core::{AlgorithmParams, Solution};
 
 #[derive(Debug)]
 pub enum Error {
@@ -684,7 +687,6 @@ impl Controller {
 											Algorithm::Cuckoo => "Cuckatoo".to_string(),
 											Algorithm::RandomX => "RandomX".to_string(),
 											Algorithm::ProgPow => "ProgPow".to_string(),
-											_ => "".to_string(),
 										};
 										stats.client_stats.connected = true;
 									}

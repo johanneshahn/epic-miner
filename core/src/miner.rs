@@ -1,6 +1,6 @@
-use config::MinerConfig;
-use errors::MinerError;
-use types::{Solution, Stats};
+use crate::config::MinerConfig;
+use crate::errors::MinerError;
+use crate::types::{Solution, Stats};
 
 pub trait Miner: Send + Sync {
 	/// Creates a new instance of a CuckooMiner with the given configuration.
@@ -53,5 +53,5 @@ pub trait Miner: Send + Sync {
 	/// block until solvers have all exited
 	fn wait_for_solver_shutdown(&self);
 
-	fn add_epoch(&mut self, start_height: u64, end_height: u64, seed: [u8; 32]) {}
+	fn add_epoch(&mut self, _start_height: u64, _end_height: u64, _seed: [u8; 32]) {}
 }

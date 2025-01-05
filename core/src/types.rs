@@ -1,6 +1,5 @@
-use std::collections::HashMap;
+
 use std::ffi::CString;
-use std::string;
 use std::sync::{Arc, RwLock};
 
 const MAX_NAME_LEN: usize = 256;

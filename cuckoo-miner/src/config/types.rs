@@ -17,9 +17,9 @@
 use plugin::SolverParams;
 use std::path::PathBuf;
 use std::{fmt, io};
-use {PluginLibrary};
+use crate::PluginLibrary;
 
-use core::errors::{MinerError};
+use core::errors::MinerError;
 
 pub static SO_SUFFIX: &str = ".cuckooplugin";
 

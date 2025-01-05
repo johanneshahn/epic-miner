@@ -19,7 +19,7 @@ mod common;
 extern crate rand;
 extern crate cuckoo_miner as cuckoo;
 
-use cuckoo::{PluginConfig};
+use cuckoo::PluginConfig;
 use common::{mining_plugin_dir_for_tests, mine_async_for_duration};
 
 // AT LEAN ///////////////

@@ -24,8 +24,6 @@ extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 extern crate toml;
-
-#[macro_use]
 extern crate slog;
 
 extern crate epic_miner_core as core;

@@ -1,13 +1,10 @@
 use std::env;
-use std::fs::File;
-use std::io::Read;
 use std::path::PathBuf;
 
-use core::config::{MinerConfig, EpicMinerPluginConfig};
+use core::config::EpicMinerPluginConfig;
 use core::errors::MinerError;
 use util::LOGGER;
-
-use {PluginConfig};
+use crate::PluginConfig;
 
 /// Transforms a set of epic-miner plugin configs to cuckoo-miner plugins configs
 pub fn read_configs(

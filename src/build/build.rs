@@ -14,16 +14,15 @@
 
 //! Build hooks to spit out version+build time info
 
-extern crate built;
+use built;
 use std::env;
+use std::path::Path;
+
 
 fn main() {
-	let mut opts = built::Options::default();
-	opts.set_dependencies(true);
-	built::write_built_file_with_opts(
-		&opts,
-		env!("CARGO_MANIFEST_DIR"),
-		format!("{}{}", env::var("OUT_DIR").unwrap(), "/built.rs"),
-	)
-	.expect("Failed to acquire build-time information");
+	// don't fail the build if something's missing, may just be cargo release
+	let _ = built::write_built_file_with_opts(
+		Some(Path::new(env!("CARGO_MANIFEST_DIR"))),
+		&Path::new(&env::var("OUT_DIR").unwrap()).join("built.rs"),
+	);
 }

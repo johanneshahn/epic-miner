@@ -20,11 +20,9 @@ use std::io::Read;
 use std::path::PathBuf;
 
 use core::config::MinerConfig;
-use core::MinerError;
-use cuckoo::PluginConfig;
 use toml;
-use types::{ConfigError, ConfigMembers, GlobalConfig};
-use util::{LoggingConfig, LOGGER};
+use crate::types::{ConfigError, ConfigMembers, GlobalConfig};
+use util::LoggingConfig;
 
 extern crate dirs;
 
@@ -188,7 +186,7 @@ impl GlobalConfig {
 							.unwrap()
 							.to_str()
 							.unwrap()
-							.clone(),
+							
 					),
 					String::from(format!("{}", e)),
 				));

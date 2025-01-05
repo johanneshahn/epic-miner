@@ -1,8 +1,8 @@
-use std::string;
+
 use std::sync::{mpsc, Arc, RwLock};
 use std::thread;
 use std::time;
-use std::time::{Instant, SystemTime, UNIX_EPOCH};
+use std::time::{ SystemTime, UNIX_EPOCH};
 
 use keccak_hash::keccak_256;
 
@@ -14,7 +14,7 @@ use core::util;
 use core::{ControlMessage, JobSharedData, JobSharedDataType, Solution, Stats};
 
 use bigint::uint::U256;
-use util::LOGGER;
+
 
 use progpow::hardware::PpGPU;
 use progpow::hardware::PpCPU;
@@ -70,9 +70,9 @@ impl PpMiner {
 		let mut iter_count = 0;
 		let mut paused = true;
 
-		let mut cpu = PpCPU::new();
+		let cpu = PpCPU::new();
 		let mut gpu = PpGPU::new(config.device, config.driver);
-		gpu.init();
+		let _ = gpu.init();
 
 		loop {
 			if let Some(message) = solver_loop_rx.try_iter().next() {
@@ -282,7 +282,7 @@ impl Miner for PpMiner {
 		for r in self.solver_stopped_rxs.iter() {
 			while let Some(message) = r.iter().next() {
 				match message {
-					ControlMessage::SolverStopped(i) => {
+					ControlMessage::SolverStopped(_i) => {
 						//debug!(LOGGER, "Solver stopped: {}", i);
 						break;
 					}

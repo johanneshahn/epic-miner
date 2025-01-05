@@ -17,7 +17,7 @@ use std::sync::{Arc, RwLock};
 
 use core::errors::MinerError;
 use plugin::{SolverSolutions, SolverStats};
-use {PluginConfig, PluginLibrary};
+use crate::{PluginConfig, PluginLibrary};
 
 pub type JobSharedDataType = Arc<RwLock<JobSharedData>>;
 

@@ -18,7 +18,7 @@ use std::sync::{mpsc, Arc, RwLock};
 use std::{self, thread};
 use time;
 use util::LOGGER;
-use {config, stats, types};
+use {config, crate::stats, crate::types};
 
 use core::config::MinerConfig;
 use core::errors::MinerError;

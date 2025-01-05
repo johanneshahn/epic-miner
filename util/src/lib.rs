@@ -28,13 +28,13 @@ extern crate rand;
 extern crate slog;
 extern crate slog_async;
 extern crate slog_term;
-
-#[macro_use]
 extern crate lazy_static;
 
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
+
+
 
 // Logging related
 pub mod logger;

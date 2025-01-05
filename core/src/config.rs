@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
-use types::Algorithm;
+use crate::types::Algorithm;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GpuConfig {

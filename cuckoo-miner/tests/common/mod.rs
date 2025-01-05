@@ -17,11 +17,14 @@
 
 extern crate cuckoo_miner as cuckoo;
 extern crate time;
+extern crate epic_miner_core;
 
 use self::cuckoo::{CuckooMiner, PluginConfig};
 use std;
 use std::env;
 use std::path::PathBuf;
+
+
 
 /// Values from T4 genesis that should be validated
 pub const T4_GENESIS_PREPOW: &str =
@@ -99,7 +102,7 @@ pub fn mine_async_for_duration(configs: &Vec<PluginConfig>, duration_in_seconds:
 				let stats_vec = miner.get_stats();
 				for s in stats_vec.unwrap().into_iter() {
 					let last_solution_time_secs = s.last_solution_time as f64 / 1000000000.0;
-					let last_hashes_per_sec = 1.0 / last_solution_time_secs;
+					let last_hashes_per_sec:f64 = 1.0 / last_solution_time_secs;
 					let status = match s.has_errored {
 						false => "OK",
 						_ => "ERRORED",

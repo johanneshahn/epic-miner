@@ -31,7 +31,8 @@ extern crate serde_json;
 use libc::*;
 use std::ffi::CString;
 use std::ptr::NonNull;
-use std::{cmp, fmt, marker};
+use std::{cmp, fmt};
+
 
 use blake2::blake2b::Blake2b;
 use byteorder::{BigEndian, ByteOrder};
@@ -52,12 +53,12 @@ pub type CuckooDestroySolverCtx = unsafe extern "C" fn(*mut SolverCtx);
 pub type CuckooRunSolver = unsafe extern "C" fn(
 	*mut SolverCtx,       // Solver context
 	*const c_uchar,       // header
-	uint32_t,             // header length
-	uint64_t,             // nonce
-	uint32_t,             // range
+	u32,             // header length
+	u64,             // nonce
+	u32,             // range
 	*mut SolverSolutions, // reference to any found solutions
 	*mut SolverStats,     // solver stats
-) -> uint32_t;
+) -> u32;
 /// Stop solver function
 pub type CuckooStopSolver = unsafe extern "C" fn(*mut SolverCtx);
 /// Fill default params of solver
@@ -67,17 +68,17 @@ pub type CuckooFillDefaultParams = unsafe extern "C" fn(*mut SolverParams);
 #[derive(Copy, Clone, Debug)]
 pub enum SolverCtx {}
 /// wrap ctx to send across threads
-pub struct SolverCtxWrapper(pub NonNull<SolverCtx>);
-unsafe impl marker::Send for SolverCtxWrapper {}
+pub struct SolverCtxWrapper<SolverCtx>(pub NonNull<SolverCtx>);
+unsafe impl<SolverCtx> std::marker::Send for SolverCtxWrapper<SolverCtx> {}
 
 /// Common parameters for a solver
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[repr(C)]
 pub struct SolverParams {
 	/// threads
-	pub nthreads: uint32_t,
+	pub nthreads: u32,
 	/// trims
-	pub ntrims: uint32_t,
+	pub ntrims: u32,
 	/// Whether to show cycle (should be true to get solutions)
 	pub showcycle: bool,
 	/// allrounds
@@ -149,9 +150,9 @@ impl Default for SolverParams {
 #[repr(C)]
 pub struct SolverStats {
 	/// device Id
-	pub device_id: uint32_t,
+	pub device_id: u32,
 	/// graph size
-	pub edge_bits: uint32_t,
+	pub edge_bits: u32,
 	/// plugin name
 	pub plugin_name: [c_uchar; MAX_NAME_LEN],
 	/// device name
@@ -161,13 +162,13 @@ pub struct SolverStats {
 	/// reason for error
 	pub error_reason: [c_uchar; MAX_NAME_LEN],
 	/// number of searched completed by device
-	pub iterations: uint32_t,
+	pub iterations: u32,
 	/// last solution start time
-	pub last_start_time: uint64_t,
+	pub last_start_time: u64,
 	/// last solution end time
-	pub last_end_time: uint64_t,
+	pub last_end_time: u64,
 	/// last solution elapsed time
-	pub last_solution_time: uint64_t,
+	pub last_solution_time: u64,
 }
 
 impl Default for SolverStats {
@@ -230,11 +231,11 @@ impl SolverStats {
 #[derive(Clone, Copy)]
 pub struct Solution {
 	/// Optional ID
-	pub id: uint64_t,
+	pub id: u64,
 	/// Nonce
-	pub nonce: uint64_t,
+	pub nonce: u64,
 	/// Proof
-	pub proof: [uint64_t; PROOFSIZE],
+	pub proof: [u64; PROOFSIZE],
 }
 
 impl Default for Solution {

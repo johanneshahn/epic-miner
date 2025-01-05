@@ -17,13 +17,8 @@
 use std::collections::HashMap;
 use std::env;
 use std::ffi::{OsString, OsStr};
-// use std::fs;
-// use std::process::Command;
 use std::path::PathBuf;
 
-// use build_helper::output;
-
-// use Build;
 
 pub struct Finder {
 	cache: HashMap<OsString, Option<PathBuf>>,

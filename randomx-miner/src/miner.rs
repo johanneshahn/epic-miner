@@ -13,7 +13,7 @@ use core::{ControlMessage, JobSharedData, JobSharedDataType, Solution, Stats};
 
 use bigint::uint::U256;
 use randomx::{calculate, RxState, RxAction};
-use util::LOGGER;
+use crate::util::LOGGER;
 
 const MAX_HASHS: u64 = 100;
 const ALGORITHM_NAME: &str = "randomx";
@@ -100,12 +100,12 @@ impl RxMiner {
 
 	fn load_next_dataset(&mut self) -> Result<(), MinerError>
 	{
-		let mut epochs = self.epochs.clone();
+		let epochs = self.epochs.clone();
 		let current_seed = self.current_seed.clone();
 		let threads = self.config.threads;
 		let rx_state = self.state.clone();
 		let is_loading = {
-			let mut epochs = epochs.read().unwrap();
+			let epochs = epochs.read().unwrap();
 			(*epochs)
 				.iter()
 				.filter(|x| x.state == EpochState::Loading || x.state == EpochState::Loaded)
@@ -178,7 +178,7 @@ impl RxMiner {
 		if let Some(ref mut e) = epoch {
 			match e.state.clone() {
 				EpochState::Failed(e) => {
-					panic!(e);
+					panic!("{}", e);
 				},
 				EpochState::Loaded => {},
 				_ => return Ok(()),
@@ -342,7 +342,7 @@ impl Miner for RxMiner {
 	}
 
 	fn start_solvers(&mut self) -> Result<(), MinerError> {
-		let s = self.state.clone();
+		let _s = self.state.clone();
 		let threads = self.config.threads;
 
 		for i in 0..(self.config.threads as usize) {
@@ -414,10 +414,10 @@ impl Miner for RxMiner {
 			sd.difficulty = difficulty;
 		}
 
-		self.swap_dataset(height);
+		let _ = self.swap_dataset(height);
 
 		if paused {
-			self.load_next_dataset();
+			let _ = self.load_next_dataset();
 			self.resume_solvers();
 		}
 

@@ -154,7 +154,7 @@ fn test_t4_genesis(pl: &PluginLibrary, mut params: SolverParams) {
 	pl.destroy_solver_ctx(ctx);
 	pl.unload();
 }
-fn run_solver(pl: &PluginLibrary, params: SolverParams) {
+fn run_solver(_pl: &PluginLibrary, _params: SolverParams) {
 	//test_mutating(pl, params.clone());
 	//test_t4_genesis(pl, params.clone());
 }

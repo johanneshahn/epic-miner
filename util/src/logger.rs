@@ -21,8 +21,8 @@ use slog_async;
 
 use backtrace::Backtrace;
 use std::{panic, thread};
-
-use types::{LogLevel, LoggingConfig};
+use lazy_static::lazy_static;
+use crate::types::{LogLevel, LoggingConfig};
 
 fn convert_log_level(in_level: &LogLevel) -> Level {
 	match *in_level {

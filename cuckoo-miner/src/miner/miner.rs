@@ -19,17 +19,17 @@
 use std::ptr::NonNull;
 use std::sync::{mpsc, Arc, RwLock};
 use std::{thread, time};
-use util::LOGGER;
+use crate::util::LOGGER;
 
-use config;
-use config::read::read_configs;
+use crate::config;
+
 use config::types::PluginConfig;
-use miner::types::{JobSharedData, JobSharedDataType, SolverInstance};
+use crate::miner::types::{JobSharedData, JobSharedDataType, SolverInstance};
 
-use miner::util;
-use miner::consensus::Proof;
-use plugin::{SolverCtxWrapper, SolverSolutions, Solution, SolverStats};
-use {PluginLibrary};
+use crate::miner::util;
+use crate::miner::consensus::Proof;
+use plugin::{SolverCtxWrapper, SolverSolutions, Solution};
+use crate::PluginLibrary;
 
 use core::config::MinerConfig;
 use core::{
@@ -40,6 +40,9 @@ use core::{
 	Solution as CrSolution,
 	AlgorithmParams};
 
+
+
+	
 /// An instance of a miner, which loads a cuckoo-miner plugin
 /// and calls its mine function according to the provided configuration
 pub struct CuckooMiner {
@@ -92,7 +95,9 @@ impl CuckooMiner {
 		// monitor whether to send a stop signal to the solver, which should
 		// end the current solve attempt below
 		let stop_handle = thread::spawn(move || loop {
+			let _ = &control_ctx;
 			let ctx_ptr = control_ctx.0.as_ptr();
+
 			while let Some(message) = control_rx.iter().next() {
 				match message {
 					ControlMessage::Stop => {

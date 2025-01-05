@@ -14,12 +14,12 @@
 
 //! Public types for config modules
 
-use std::collections::HashMap;
+
 use std::path::PathBuf;
 use std::{fmt, io};
 
 use core::config::MinerConfig;
-use core::Algorithm;
+
 use util;
 
 /// Error type wrapping config errors.
@@ -55,9 +55,6 @@ impl fmt::Display for ConfigError {
 			}
 			ConfigError::FileNotFoundError() => {
 				write!(f, "Could not find a valid epic-miner.toml!")
-			}
-			ConfigError::SerializationError(ref message) => {
-				write!(f, "Error serializing configuration: {}", message)
 			}
 			ConfigError::SerializationError(ref message) => {
 				write!(f, "Error serializing configuration: {}", message)
