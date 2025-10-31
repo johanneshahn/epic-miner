@@ -1,6 +1,6 @@
 # Epic Miner
 
-A standalone mining implementation intended for mining epic against a running Epic node.
+ A standalone mining implementation intended for mining epic against a running Epic node.
 
 ## Supported Platforms
 
